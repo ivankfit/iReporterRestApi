@@ -1,0 +1,10 @@
+[report] 
+omit =
+   venv/*
+   tests/*
+   app\views\__init__.py
+   app\__init__.py   
+   /home/travis/virtualenv/python3.6.3/*
+    app\handy\utils.py
+
+   
