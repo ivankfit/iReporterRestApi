@@ -35,6 +35,21 @@ class TestsStart(unittest.TestCase):
         data=json.loads(result.data.decode())
         self.assertEqual(result.status_code,400)
         self.assertEqual(data['msg'],'comment missing! please supply in the comment')
+
+    # def test_if_location_is_not_captured(self):
+    #     expectedreq ={
+
+    #     "type":"Red_flag",
+    #     "comment":"asked for bribe",
+    #     "status":"draft",
+    #     "image":"image"
+
+    #     }
+    #     result = self.app.post('/api/v1/red-flags', content_type = 'multipart/form-data', 
+    #         data=json.dumps(expectedreq))
+    #     data=json.loads(result.data.decode())
+    #     self.assertEqual(result.status_code,400)
+    #     self.assertEqual(data['msge'],'location is missing')
    
     def test_redflag_not_json(self):
         expectedreq ={

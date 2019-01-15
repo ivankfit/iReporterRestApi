@@ -15,16 +15,19 @@ def index():
 
 @incident.route('/api/v1/red-flags',methods=['POST'])
 def postred_flags():
+    data = request.form
     ctype=str(request.headers['Content-Type']).split(';')[0]
     if ctype!='multipart/form-data':
           return jsonify({'msg':'request header type should be form-data'}),400
-    data = request.form
 
     if not 'comment' in data:
           return jsonify({'msg': 'comment missing! please supply in the comment'}), 400
 
     if len(data['comment']) <5:
           return jsonify({'message': 'comment too short! please supply long text'}), 400
+
+    if not 'location' in data:
+          return jsonify({'msge': 'location is missing'}),400
     
     PROJECT_HOME = os.path.dirname(os.path.realpath(__file__))
     UPLOAD_FOLDER = '{}/uploads/'.format(PROJECT_HOME)
@@ -38,8 +41,6 @@ def postred_flags():
     createfolder(app.config['UPLOAD_FOLDER'])
     saved_path = os.path.join(app.config['UPLOAD_FOLDER'], img_name)
     image.save(saved_path)   
-    
-
     
     latlgvalues=utils.get_latlong(data['location'])
 
